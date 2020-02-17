@@ -61,7 +61,8 @@ Par					iface enp0s3 inet static
 *Changer le port par défaut SSH (22)
 #Port 22 ->				Port 2222(par exemple)
 
-(les ports disponibles sont au nombre de 65 536(2^16), 16 premiers bits en partant de droite. Les ports utilisés par défaut par le systeme sont de 0 a 1023, 22 étant le port par defaut du service SSH).
+(les ports disponibles sont au nombre de 65 536(2^16), 16 premiers bits en partant de droite.
+Les ports utilisés par défaut par le systeme sont de 0 a 1023, 22 étant le port par defaut du service SSH).
 
 interdire l'utilisateur root de se connecter en SSH
 #PermitRootLogin without-password ->	PermitRootLogin no
@@ -138,12 +139,15 @@ et configurer le firewall puis l'enregistrer (y ajouter les lignes suivantes) :
 
 [Mettre en place une protection contre les DOS (Denial Of ServiceAttack)]
 
-[Fail2ban] : Fail2ban est un framework de prévention contre les intrusions, Fail2ban bloque les adresses IP appartenant à des hôtes qui tentent de casser la sécurité du système, pendant une période configurable (mise en quarantaine).
+[Fail2ban] : Fail2ban est un framework de prévention contre les intrusions,
+Fail2ban bloque les adresses IP appartenant à des hôtes qui tentent de casser
+la sécurité du système, pendant une période configurable (mise en quarantaine).
 
 *Installer fail2ban ->			sudo apt-get install fail2ban
 
 *Copier le fichier jail.conf ->		sudo cp jail.conf jail.local (dans /etc/fail2ban/)
-(le fichier jail.conf sera modifier à chaque mis à jour, donc pour un fichier fixe, en créer un autre (jail.local)).
+(le fichier jail.conf sera modifier à chaque mis à jour, donc pour un fichier fixe,
+en créer un autre (jail.local)).
 
 *Y ajouter/modifier ces lignes:
 
@@ -169,7 +173,8 @@ backend = %(sshd_backend)s
 *Ajouter au fichier IPtables ces deux lignes ->
 -A INPUT -j LOG
 -A FORWARD -j LOG
-(Active la journalisation sur les chaînes d'entrée et de transfert d'IPtables afin que le démon PSAD puisse détecter toute activité anormale.)
+(Active la journalisation sur les chaînes d'entrée et de transfert d'IPtables afin
+que le démon PSAD puisse détecter toute activité anormale.)
 
 *Ouvrir le fichier de configuration
 principal du psad.conf ->		sudo vim /etc/psad/psad.conf
@@ -177,12 +182,15 @@ principal du psad.conf ->		sudo vim /etc/psad/psad.conf
 *Modifier les lignes suivantes ->	EMAIL_ADDRESSES		root@localhost;
 					HOSTNAME		localhost;
 
-Modifier ceci pour pointer vers le fichier syslog, où psad aura réellement la possibilité de parcourir les journaux actifs ->
+Modifier ceci pour pointer vers le fichier syslog, où psad aura réellement
+la possibilité de parcourir les journaux actifs ->
 					ENABLE_SYSLOG_FILE	Y;
 					IPT_WRITE_FWDATA	Y;
 					IPT_SYSLOG_FILE		/var/log/syslog;
 
-*Activer les paramètres suivants pour activer la fonction IPS et le niveau de danger. Après avoir activé le paramètre dans le fichier de configuration, le démon PSAD bloquera automatiquement l'attaquant en ajoutant son adresse IP dans les chaînes IPtables.
+*Activer les paramètres suivants pour activer la fonction IPS et le niveau de danger.
+Après avoir activé le paramètre dans le fichier de configuration, le démon PSAD bloquera
+automatiquement l'attaquant en ajoutant son adresse IP dans les chaînes IPtables.
 					ENABLE_AUTO_IDS		Y;
 					AUTO_IDS_DANGER_LEVEL	1;
 
@@ -216,7 +224,8 @@ ex:  	UNIT                               LOAD   ACTIVE SUB     DESCRIPTION
 
 Désactiver les services estimé non necéssaires ->
 
-*console-setup.service : Ce paquet fournit à la console le même modèle de configuration du clavier que celui du système X Window.
+*console-setup.service : Ce paquet fournit à la console le même modèle
+de configuration du clavier que celui du système X Window.
 
 *keyboard-setup.service : configuration du clavier.
 
@@ -224,9 +233,12 @@ exim4 : Mail Transfert Agent (postfix est utilisé à la place).
 
 /***************************************************************************************************/
 
-[Réalisez un script qui met à jour l’ensemble des sources de package une fois par semaine à 4h00 du matin età chaque reboot de la machine.]
+[Réalisez un script qui met à jour l’ensemble des sources de package une fois
+par semaine à 4h00 du matin età chaque reboot de la machine.]
 
-[Cron] : est un programme qui permet aux utilisateurs des systèmes Unix d’exécuter automatiquement des scripts, des commandes ou des logiciels à une date et une heure spécifiée à l’avance.
+[Cron] : est un programme qui permet aux utilisateurs des systèmes Unix
+d’exécuter automatiquement des scripts, des commandes ou des logiciels à une
+date et une heure spécifiée à l’avance.
 
 *Ecriture du scipt :
 
