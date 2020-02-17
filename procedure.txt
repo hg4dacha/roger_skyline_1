@@ -87,7 +87,7 @@ pour l'autoriation ->			ssh-copy-id wana@10.11.93.93 -p 2222
 
 *Installer iptables-persistent
 (version qui permet de rendre 
-les modifications persistentent) ->	sudo apt-get install iptables-persistent
+les modifications persistante) ->	sudo apt-get install iptables-persistent
 
 *Ouvrir le fichier rules.v4 ->		sudo vim /etc/iptables/rules.v4
 et configurer le firewall puis l'enregistrer (y ajouter les lignes suivantes) :
