@@ -250,7 +250,8 @@ date et une heure spécifiée à l’avance.
 
 @reboot apt-get update && ((date && apt-get -y upgrade; echo) >> /var/log/update_script.log2>&1)
 
-(Pour tester la commande sur le terminal il faut ajouter les droits d'écriture pour les non-root au fichier update_script.log).
+(Pour tester la commande sur le terminal il faut ajouter les droits d'écriture
+pour les non-root au fichier update_script.log).
 
 /***************************************************************************************************/
 
@@ -266,7 +267,9 @@ et stocker le resusltat dans le fichier
 *Ouvrir le fichier crontab ->			sudo crontab -e
 *Y ajouter les lignes suivantes :
 
-0 0 * * * md500=`cat /etc/cron.d/md5_cron`; md511=`md5sum /etc/crontab`; if [ "$md500" != "$md511" ]; then md5sum /etc/crontab > /etc/cron.d/md5_cron; echo "WARNING - CRONTAB WAS MODIFIED\n" | mail -s "Crontab was modified" wana@localhost; fi
+0 0 * * * md500=`cat /etc/cron.d/md5_cron`; md511=`md5sum /etc/crontab`; if [ "$md500" != "$md511" ];
+ then md5sum /etc/crontab > /etc/cron.d/md5_cron; echo "WARNING - CRONTAB WAS MODIFIED\n" | mail -s
+  "Crontab was modified" wana@localhost; fi
 
 /***************************************************************************************************/
 
@@ -280,7 +283,8 @@ et stocker le resusltat dans le fichier
 
 *Generer un certificat auto signe ->		openssl genrsa -out mysite.key 2048
 						openssl req -new -key mysite.key -out mysite.csr
-						openssl x509 -req -days 365 -in mysite.csr -signkey mysite.key -out 							mysite.crt
+						openssl x509 -req -days 365 -in mysite.csr -signkey mysite.key -out
+						mysite.crt
 						sudo systemctl restart apache2 (si demandé)
 						sudo a2enmod rewrite
 						sudo systemctl restart apache2 (si demandé)
